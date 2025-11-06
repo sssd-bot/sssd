@@ -486,6 +486,11 @@ int main(int argc, const char *argv[])
     struct devicecode_ctx *dc_ctx;
     const char *user_identifier = NULL;
     int exit_status = EXIT_FAILURE;
+<<<<<<< HEAD
+=======
+    char *out = NULL;
+    char *client_secret_tmp = NULL;
+>>>>>>> 2f3b3db88 (OIDC_CHILD: fix compilation warning)
 
     ret = parse_cli(argc, argv, &opts);
     if (ret != EOK) {
