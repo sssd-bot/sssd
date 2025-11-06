@@ -24,6 +24,7 @@
 */
 
 #include <curl/curl.h>
+#include "util/memory_erase.h"
 #include "oidc_child/oidc_child_util.h"
 
 char *url_encode_string(TALLOC_CTX *mem_ctx, const char *inp)
@@ -81,10 +82,17 @@ static size_t write_callback(char *ptr, size_t size, size_t nmemb,
     tmp = talloc_asprintf(dc_ctx, "%s%.*s",
                           dc_ctx->http_data == NULL ? "" : dc_ctx->http_data,
                           (int) realsize, ptr);
+<<<<<<< HEAD
     talloc_free(dc_ctx->http_data);
     explicit_bzero(ptr, realsize);
     dc_ctx->http_data = tmp;
     if (dc_ctx->http_data == NULL) {
+=======
+    talloc_free(rest_ctx->http_data);
+    sss_erase_mem_securely(ptr, realsize);
+    rest_ctx->http_data = tmp;
+    if (rest_ctx->http_data == NULL) {
+>>>>>>> 9c139765e (OIDC_CHILD: use `sss_erase_mem_securely()` wrapper)
         DEBUG(SSSDBG_OP_FAILURE, "Failed to copy received data.\n");
         return 0;
     }

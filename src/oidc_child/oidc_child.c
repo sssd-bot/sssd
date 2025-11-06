@@ -30,6 +30,7 @@
 
 #include "oidc_child/oidc_child_util.h"
 
+#include "util/memory_erase.h"
 #include "util/util.h"
 #include "util/atomic_io.h"
 
@@ -270,6 +271,28 @@ struct cli_opts {
     bool get_access_token;
 };
 
+<<<<<<< HEAD
+=======
+static void free_cli_opts_members(struct cli_opts *opts)
+{
+    free(opts->issuer_url);
+    free(opts->client_id);
+    free(opts->device_auth_endpoint);
+    free(opts->token_endpoint);
+    free(opts->userinfo_endpoint);
+    free(opts->jwks_uri);
+    free(opts->scope);
+    if (opts->client_secret != NULL) {
+        sss_erase_mem_securely(opts->client_secret, strlen(opts->client_secret));
+    }
+    free(opts->client_secret);
+    free(opts->ca_db);
+    free(opts->user_identifier_attr);
+    free(opts->search_str);
+    free(opts->idp_type);
+}
+
+>>>>>>> 9c139765e (OIDC_CHILD: use `sss_erase_mem_securely()` wrapper)
 static int parse_cli(int argc, const char *argv[], struct cli_opts *opts)
 {
     poptContext pc;
@@ -535,6 +558,28 @@ int main(int argc, const char *argv[])
                       "Failed to read client secret from stdin.\n");
                 goto done;
             }
+<<<<<<< HEAD
+=======
+            opts.client_secret = strdup(client_secret_tmp);
+            sss_erase_mem_securely(client_secret_tmp, strlen(client_secret_tmp));
+            if (opts.client_secret == NULL) {
+                DEBUG(SSSDBG_OP_FAILURE,
+                      "Failed to copy client secret.\n");
+                goto done;
+            }
+        }
+    }
+
+    if (IS_ID_CMD(opts.oidc_cmd)) {
+        ret = oidc_get_id(main_ctx, opts.oidc_cmd, opts.idp_type,
+                          opts.search_str, opts.search_str_type,
+                          opts.libcurl_debug, opts.ca_db,
+                          opts.client_id, opts.client_secret,
+                          opts.token_endpoint, opts.scope, &out);
+        if (ret != EOK) {
+            DEBUG(SSSDBG_OP_FAILURE, "Id lookup failed.\n");
+            goto done;
+>>>>>>> 9c139765e (OIDC_CHILD: use `sss_erase_mem_securely()` wrapper)
         }
 
         ret = get_devicecode(dc_ctx, opts.client_id, opts.client_secret);
@@ -555,6 +600,20 @@ int main(int argc, const char *argv[])
                       "Failed to read device code from stdin.\n");
                 goto done;
             }
+<<<<<<< HEAD
+=======
+
+            if (opts.client_secret_stdin) {
+                opts.client_secret = strdup(client_secret_tmp);
+                sss_erase_mem_securely(client_secret_tmp, strlen(client_secret_tmp));
+                if (opts.client_secret == NULL) {
+                    DEBUG(SSSDBG_OP_FAILURE,
+                          "Failed to copy client secret.\n");
+                    ret = ENOMEM;
+                    goto done;
+                }
+            }
+>>>>>>> 9c139765e (OIDC_CHILD: use `sss_erase_mem_securely()` wrapper)
         }
     }
 
