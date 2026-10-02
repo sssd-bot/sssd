@@ -510,6 +510,30 @@ int main(int argc, const char *argv[])
 
     umask(DFL_RSP_UMASK);
 
+<<<<<<< HEAD
+=======
+    /* This is to clear dangerous variables like 'LDB_MODULES_PATH'
+     * from environment of privileged responder.
+     * In case of socket activation, 'LISTEN_PID' and 'LISTEN_FDS'
+     * should be kept as those are used by `sd_listen_fds()`.
+     */
+    sss_getenv(NULL, "LISTEN_PID", NULL, &env_listen_pid);
+    sss_getenv(NULL, "LISTEN_FDS", NULL, &env_listen_fds);
+    ret = clearenv();
+    if (ret != 0) {
+        fprintf(stderr, "Failed to clear env.\n");
+        return 1;
+    }
+    if (env_listen_pid != NULL) {
+        setenv("LISTEN_PID", env_listen_pid, 1);
+        talloc_free(env_listen_pid);
+    }
+    if (env_listen_fds != NULL) {
+        setenv("LISTEN_FDS", env_listen_fds, 1);
+        talloc_free(env_listen_fds);
+    }
+
+>>>>>>> cbdb054a1 (tests: remove legacy intg test suite)
     pc = poptGetContext(argv[0], argc, argv, long_options, 0);
     while((opt = poptGetNextOpt(pc)) != -1) {
         switch(opt) {
