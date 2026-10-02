@@ -20,7 +20,7 @@ if HAVE_MANPAGES
 SUBDIRS += src/man
 endif
 
-SUBDIRS += . src/tests/cwrap src/tests/intg src/tests/test_CA \
+SUBDIRS += . src/tests/cwrap src/tests/test_CA \
              src/tests/test_ECC_CA src/tools/analyzer
 
 # Some old versions of automake don't define builddir
@@ -468,7 +468,16 @@ dist_noinst_SCRIPTS = \
     src/config/SSSDConfigTest.py3.sh \
     contrib/fedora/bashrc_sssd \
     contrib/fedora/make_srpm.sh \
+<<<<<<< HEAD
     contrib/ci/clean \
+=======
+    contrib/ci/check-valgrind \
+    contrib/ci/configure.sh \
+    contrib/ci/deps.sh \
+    contrib/ci/distro.sh \
+    contrib/ci/get-matrix.py \
+    contrib/ci/misc.sh \
+>>>>>>> cbdb054a1 (tests: remove legacy intg test suite)
     contrib/ci/rpm-spec-builddeps \
     contrib/ci/run \
     contrib/ci/valgrind-condense \
@@ -4028,6 +4037,7 @@ test_sssd_krb5_localauth_plugin_LDADD = \
     $(NULL)
 endif
 
+<<<<<<< HEAD
 #####################
 # Integration tests #
 #####################
@@ -4074,6 +4084,8 @@ intgcheck:
 	$(MAKE) intgcheck-run
 	$(MAKE) intgcheck-clean
 
+=======
+>>>>>>> cbdb054a1 (tests: remove legacy intg test suite)
 ####################
 # Client Libraries #
 ####################
