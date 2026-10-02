@@ -450,7 +450,6 @@ int main(int argc, const char *argv[])
 
     umask(DFL_RSP_UMASK);
 
-#ifndef INTGCHECK_BUILD
     /* This is to clear dangerous variables like 'LDB_MODULES_PATH'
      * from environment of privileged responder. It's easier to
      * clear everything since 'sssd_pam' shouldn't rely on any.
@@ -460,7 +459,18 @@ int main(int argc, const char *argv[])
         fprintf(stderr, "Failed to clear env.\n");
         return 1;
     }
+<<<<<<< HEAD
 #endif  /* 'intgcheck' relies on 'LDB_MODULES_PATH' to setup a test env */
+=======
+    if (env_listen_pid != NULL) {
+        setenv("LISTEN_PID", env_listen_pid, 1);
+        talloc_free(env_listen_pid);
+    }
+    if (env_listen_fds != NULL) {
+        setenv("LISTEN_FDS", env_listen_fds, 1);
+        talloc_free(env_listen_fds);
+    }
+>>>>>>> cbdb054a1 (tests: remove legacy intg test suite)
 
     pc = poptGetContext(argv[0], argc, argv, long_options, 0);
     while((opt = poptGetNextOpt(pc)) != -1) {

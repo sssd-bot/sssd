@@ -65,8 +65,12 @@ if __name__ == "__main__":
     centos = sorted(get_centos_matrix())
 
     matrix = {
+<<<<<<< HEAD
         'intgcheck': [*centos],
         'multihost': [*centos],
+=======
+        'multihost': [*fedora, *centos],
+>>>>>>> cbdb054a1 (tests: remove legacy intg test suite)
     }
 
     print(json.dumps(matrix, indent=2))
