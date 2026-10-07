@@ -66,11 +66,15 @@ if __name__ == "__main__":
 
     matrix = {
 <<<<<<< HEAD
+<<<<<<< HEAD
         'intgcheck': [*centos],
         'multihost': [*centos],
 =======
         'multihost': [*fedora, *centos],
 >>>>>>> cbdb054a1 (tests: remove legacy intg test suite)
+=======
+        'system': [*fedora, *centos],
+>>>>>>> 5ce9d9ed9 (CI: trim unused deps.sh/distro.sh helpers, rename matrix key, fix keytab leak)
     }
 
     print(json.dumps(matrix, indent=2))
