@@ -32,10 +32,14 @@ jobs:
       run: |
         source ../contrib/fedora/bashrc_sssd
 <<<<<<< HEAD
+<<<<<<< HEAD
         make CFLAGS+="$SSS_WARNINGS" -j$PROCESSORS
 =======
         # -g3 includes macro definitions in debug info, for better
         # backtraces/suppressions in the make check-valgrind step below.
+=======
+        # -g3 is needed for useful Valgrind backtraces/suppressions
+>>>>>>> 5ce9d9ed9 (CI: trim unused deps.sh/distro.sh helpers, rename matrix key, fix keytab leak)
         make CFLAGS+="$SSS_WARNINGS -Werror -g3" -j$PROCESSORS
 >>>>>>> cbdb054a1 (tests: remove legacy intg test suite)
 
