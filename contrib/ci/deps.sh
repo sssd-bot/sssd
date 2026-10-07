@@ -100,6 +100,7 @@ if [[ "$DISTRO_BRANCH" == -redhat-* ]]; then
     readarray -t -O "${#DEPS_LIST[@]}" DEPS_LIST <<<"$_DEPS_LIST_SPEC"
 fi
 
+<<<<<<< HEAD
 if [[ "$DISTRO_BRANCH" == -debian-* ]]; then
     DEPS_LIST+=(
         autoconf
@@ -184,6 +185,8 @@ if [[ "$DISTRO_BRANCH" == -debian-* ]]; then
 
 fi
 
+=======
+>>>>>>> 056c2e71f (CI: drop Debian as a build target)
 declare -a -r DEPS_LIST
 
 # Install dependencies.
