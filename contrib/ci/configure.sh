@@ -19,8 +19,6 @@
 if [ -z ${_CONFIGURE_SH+set} ]; then
 declare -r _CONFIGURE_SH=
 
-. distro.sh
-
 # List of "configure" arguments.
 declare -a CONFIGURE_ARG_LIST=(
     "--disable-dependency-tracking"
@@ -32,6 +30,7 @@ declare -a CONFIGURE_ARG_LIST=(
     "--enable-systemtap"
 )
 
+<<<<<<< HEAD
 
 CONFIGURE_ARG_LIST+=(
     "--without-python2-bindings"
@@ -74,6 +73,8 @@ if [[ "$DISTRO_BRANCH" == -redhat-fedora-* ||
     )
 fi
 
+=======
+>>>>>>> 056c2e71f (CI: drop Debian as a build target)
 declare -r -a CONFIGURE_ARG_LIST
 
 fi # _CONFIGURE_SH
